@@ -1,0 +1,74 @@
+//Kamal i have gotten this far. we still ned a start screen and an array of boxes going down
+
+
+boolean begin=true;
+int xSpeed;
+int ySpeed;
+int y;
+int x;
+int[]rocks;
+
+
+int xCoor;
+int yCoor;
+void setup(){
+  rocks= new rocks[20];
+  for(int i=0;i<rocks.length;i++){
+    rocks[i]=new rocks(r
+  ySpeed=5;
+  xSpeed=3;
+  y=0;
+  x=(int)random(50,width);
+  xCoor=600;
+  yCoor=695;
+  size(1200,700);
+  rectMode(CENTER);
+
+ }
+void draw(){
+  background(0);
+  gameScreen();
+  rock();
+}
+void drawStartScreen(){
+      background(0);
+      fill(random(255),random(255),random(255));
+      textSize(50);
+      textAlign(CENTER);
+      text("Wecome to Asteriods",600,200);
+      textSize(25);
+      text("Press the mouse to begin",600,300);
+      if(mousePressed){
+        begin=false;
+ }
+       text("There is no winning try ot survive;{",600,500);
+       text("Don't get hit by the asteriods or ufo's or you will die(duh).",600,530);
+       text("Which will result in you restarting your precious progress",600,560);
+       textSize(50);      
+       text("Hence the game name ASTERIODS!!!",600,620);
+}
+void keyPressed(){
+  if(key=='a'||key=='A'){
+    xCoor-=15;
+  }
+  if(key=='d'||key=='D'){
+    xCoor+=15;
+ }
+}
+void gameScreen(){
+  background(0);
+  fill(0,255,0);
+  rect(xCoor,yCoor-30,10,10);
+  rect(xCoor,yCoor,50,50);
+}
+void mousePressed(){
+  if(begin && key == ' '){
+    begin=true;
+    gameScreen();
+  }
+}
+void rock(){
+  y+=ySpeed;
+  rect(x,y,40,40);
+}
+
