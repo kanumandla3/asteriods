@@ -1,0 +1,65 @@
+
+
+
+boolean begin=true;
+int xSpeed;
+int ySpeed;
+int y;
+int x;
+int h;
+int w;
+int a=3;
+drawrock[]newRocks;
+int xCoor;
+int yCoor;
+void setup(){
+  size(1200,700);
+  
+  xCoor=600;
+  yCoor=695;
+  }
+  rectMode(CENTER);
+}
+void draw(){
+  background(0);
+  if(a>=3){
+  drawStartScreen();
+  }else{
+    gameScreen();
+  }
+}
+
+void drawStartScreen(){
+      background(0);
+      fill(random(255),random(255),random(255));
+      textSize(50);
+      textAlign(CENTER);
+      text("Wecome to Asteriods/Space Invaders",600,200);
+      textSize(25);
+      text("click the mouse to begin",600,300);
+      if(mousePressed){
+        begin=false;
+ }
+       text("There is no winning try to survive;{",600,500);
+       text("Don't get hit by the asteriods you will die.",600,530);
+       text("Which will result in you restarting your precious progress",600,560);
+       textSize(50);      
+       text("Hence the game name ASTERIODS/SPACE INVADERS!!!",600,620);
+}
+void keyPressed(){
+  if(key=='a'||key=='A'){
+    xCoor-=25;
+  }
+  if(key=='d'||key=='D'){
+    xCoor+=25;
+ }
+}
+void gameScreen(){
+  background(0);
+  fill(0,255,0);
+  rect(xCoor,yCoor-30,10,10);
+  rect(xCoor,yCoor,50,50);
+}
+void mousePressed(){
+  a--;
+}
