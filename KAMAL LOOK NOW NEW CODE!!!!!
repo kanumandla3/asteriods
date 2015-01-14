@@ -1,0 +1,178 @@
+boolean begin=true;
+boolean end;
+int xSpeed;
+int ySpeed;
+int y;
+int x;
+int h;
+int w;
+int a=3;
+int xCoor2;
+int yCoor2;
+int SxSpeed=20;
+rocks[]newRocks;
+int xC;
+int yC;
+void setup() {
+  size(1200, 700);
+  xC=570;
+  yC=655;
+  xCoor2=600;
+  yCoor2=695;
+  rectMode(CENTER);
+  newRocks= new rocks[1];
+
+  startCircles();
+  print(newRocks[0].xCoor);
+}
+
+void draw() {
+  background(0);
+  if (a>=3) {
+    drawStartScreen();
+  } else  {
+    gameScreen();
+ }
+}
+
+void gameScreen() {
+  background(0);
+  quickStrip();
+  drawShip();
+  moveShip();
+  bounceship();
+  startCircles2();
+}
+void endScreen(){
+}
+
+void keyPressed() {
+}
+
+void mousePressed() {
+  a--;
+}
+
+void quickStrip() {
+  int xCoor=5;
+  for (int i=0; i<120; i++) {
+    strokeWeight(2);
+    fill(random(255), random(255), random(255), 150);
+    ellipse(xCoor, 620, 10, 10);
+    xCoor+=10;
+  }
+}
+void drawStartScreen() {
+  background(0);
+  fill(random(255), random(255), random(255));
+  textSize(30);
+  textAlign(CENTER);
+  text("Wecome to Asteriods/Space Invaders", 600, 200);
+  textSize(25);
+  text("click the mouse to begin", 600, 300);
+  if (mousePressed) {
+    begin=false;
+  }
+  text("There is no winning try to survive;{", 600, 500);
+  text("Don't get hit by the asteriods you will die.", 600, 530);
+  text("Which will result in you restarting your precious progress", 600, 560);
+  textSize(30);
+  text("Hence the game name ASTERIODS/SPACE INVADERS!!!", 600, 620);
+}
+void startCircles() {
+  for (int i=0; i<newRocks.length; i++) {
+    newRocks[i]=new rocks(random(10, width-10), random(10, width/7), int(random(20,60)), int(random(1,10)));
+  }
+}
+  
+void startCircles2(){
+  for (int i=0; i<newRocks.length; i++) {
+    newRocks[i].displayRocks();
+    newRocks[i].moveRocks();
+    newRocks[i].bounceRocks();
+    newRocks[i].deathRocks();
+  }
+}
+
+class rocks {
+  float xCoor;
+  float yCoor;
+  int rad;
+  int ySpeed;
+  int z=3;
+  rocks(float x, float y, int r, int ys) {
+    xCoor=x;
+    yCoor=y;
+    rad=r;
+    ySpeed=ys;
+  }
+  void displayRocks() {
+    fill(124, 99, 49);
+    strokeWeight(2);
+    stroke(random(255), random(255), random(255));
+    rect(xCoor,yCoor,rad,rad);
+  }
+  void moveRocks() {
+    yCoor+=ySpeed;
+  }
+void deathRocks() {
+ if(yCoor>=yC&&xCoor<=xC+60){
+  background(0);
+  fill(random(255), random(255), random(255));
+  textSize(30);
+  textAlign(CENTER);
+  text("You have died!", 600, 200);
+  textSize(25);
+  text("Press a key to restart", 600, 300);
+   
+ }
+}
+  void bounceRocks() {
+    if (xCoor<=0) {
+      while (z>0) {
+        xCoor+=SxSpeed;
+        z--;
+      }
+    }
+      if (xCoor>=width) {
+      while (z>0) {
+        xCoor-=SxSpeed;
+        z--;
+      }
+    }
+  }
+}
+void drawShip() {
+  strokeWeight(1);
+  fill(255, 0, 0);
+  rect(xCoor2, yCoor2-30, 10, 10);
+  fill(0, 255, 0);
+  rect(xCoor2, yCoor2, 50, 50);
+  rectMode(CORNER);
+  fill(0);
+  stroke(255);
+  rect(xC,yC,60,3);
+  rectMode(CENTER);
+}
+void moveShip() {
+  if (keyPressed) {
+    if (key=='a'||key=='A') {
+      xCoor2-=25;
+      xC-=25;
+    }
+    if (key=='d'||key=='D') {
+      xCoor2+=25;
+      xC+=25;
+    }
+  }
+}
+void bounceship() {
+  if (xCoor2-25<=0) {
+    xCoor2=25;
+    xC=25;
+  }
+  if (xCoor2+25>=width) {
+    xCoor2=width-25;
+    xC=width-20;
+  }
+}
